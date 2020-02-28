@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ERPResourcesManager.Search"
+             Title="Pesquisar">
+    <ContentPage.Content>
+        <StackLayout>
+            <Button
+               Text="Logout"
+               HorizontalOptions="End"
+               VerticalOptions="Start"
+               Clicked="Button_Clicked_1" />
+            <StackLayout Margin="30,0,30,30" VerticalOptions="Center">
+                <Label Text="Numero do Material" 
+               HorizontalOptions="Start"
+               VerticalOptions="Start"/>
+                <Entry Placeholder="" />
+                <Label Text="Nome" 
+               HorizontalOptions="Start"
+               VerticalOptions="Start"/>
+                <Entry Placeholder="" Text="parafuso"/>
+                <Label Text="Localização" 
+               HorizontalOptions="Start"
+               VerticalOptions="Start"/>
+                <Entry Placeholder="" />
+                <Button Text="Buscar" Clicked="Button_Clicked"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

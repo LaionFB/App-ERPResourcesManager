@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ERPResourcesManager.Home"
+             Title="Home">
+    <ContentPage.Content>
+        <StackLayout>
+            <Button
+               Text="Logout"
+               HorizontalOptions="End"
+               VerticalOptions="Start" 
+               Clicked="Button_Clicked_1" />
+            <Label Text="Procure um item ou escaneie o código de barras"
+                   HorizontalOptions="Center"
+                   Margin="0, 20, 0, 0"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ImageButton
+               Source="camera.png"
+               HorizontalOptions="Start"
+                Grid.Row="1" Grid.Column="0" 
+                     Clicked="Button_Clicked"
+               VerticalOptions="Center" />
+                <ImageButton
+               Source="search.png"
+               HorizontalOptions="End"
+                Grid.Row="1" Grid.Column="1" 
+                     Clicked="Button_Clicked"
+               VerticalOptions="Center" />
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
