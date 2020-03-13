@@ -27,6 +27,9 @@ namespace ERPResourcesManager
 
         async void Logout()
         {
+            var tokens = await App.Database.GetAuthTokensAsync();
+            foreach (var token in tokens)
+                await App.Database.DeleteAuthTokenAsync(token);
             await Application.Current.MainPage.Navigation.PopToRootAsync();
         }
         private void Button_Clicked_1(object sender, EventArgs e)
