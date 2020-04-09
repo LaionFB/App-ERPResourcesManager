@@ -10,11 +10,11 @@
         <Label Text="Login" 
            HorizontalOptions="Start"
            VerticalOptions="Start"/>
-        <Entry Text="teste@gmail.com" />
+        <Entry x:Name="username" Text="admin" />
         <Label Text="Password" 
            HorizontalOptions="Start"
            VerticalOptions="Start" />
-        <Entry Text="123456" IsPassword="true" />
+        <Entry x:Name="password" Text="admin" IsPassword="true" />
         <Button Text="Entrar" Clicked="Button_Clicked"/>
     </StackLayout>
 

@@ -27,21 +27,17 @@ namespace ERPResourcesManager
         }
         async void Login()
         {
-            var token = GenRandomString(32);//simula geração de um token no backend
-            var authToken = new AuthToken() { Token = token };
-            await App.Database.SaveAuthTokenAsync(authToken);
-            await Navigation.PushAsync(new Home());
-        }
-
-        private static string GenRandomString(int size)
-        {
-            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            var random = new Random();
-            var result = new string(
-                Enumerable.Repeat(chars, size)
-                          .Select(s => s[random.Next(s.Length)])
-                          .ToArray());
-            return result;
+            try
+            {
+                var token = Services.HttpService.Login(username.Text, password.Text);
+                var authToken = new AuthToken() { Token = token };
+                await App.Database.SaveAuthTokenAsync(authToken);
+                await Navigation.PushAsync(new Home());
+            }
+            catch (Exception e)
+            {
+                await DisplayAlert("Erro", e.Message, "OK");
+            }
         }
     }
 }
