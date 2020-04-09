@@ -14,15 +14,15 @@
                 <Label Text="Numero do Material" 
                HorizontalOptions="Start"
                VerticalOptions="Start"/>
-                <Entry Placeholder="" />
+                <Entry x:Name="cod" Placeholder="" />
                 <Label Text="Nome" 
                HorizontalOptions="Start"
                VerticalOptions="Start"/>
-                <Entry Placeholder="" Text="parafuso"/>
+                <Entry x:Name="name" Placeholder="" Text="parafuso"/>
                 <Label Text="Localização" 
                HorizontalOptions="Start"
                VerticalOptions="Start"/>
-                <Entry Placeholder="" />
+                <Entry x:Name="position" Placeholder="" />
                 <Button Text="Buscar" Clicked="Button_Clicked"/>
             </StackLayout>
         </StackLayout>

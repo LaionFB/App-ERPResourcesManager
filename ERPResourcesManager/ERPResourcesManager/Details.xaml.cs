@@ -12,9 +12,9 @@ namespace ERPResourcesManager
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Details : ContentPage
 	{
-		public Details ()
+		public Details (int id)
 		{
-			InitializeComponent ();
+			InitializeComponent();
         }
 
         async void Logout()

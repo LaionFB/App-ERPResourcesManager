@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,9 @@ namespace ERPResourcesManager
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Result : ContentPage
 	{
-		public Result ()
+        private List<dynamic> list = new List<dynamic>();
+        private ObservableCollection<string> names = new ObservableCollection<string>();
+        public Result (string cod, string name, string position)
 		{
 			InitializeComponent ();
 
@@ -20,20 +23,30 @@ namespace ERPResourcesManager
             template.SetValue(TextCell.TextColorProperty, Color.Black);
             template.SetBinding(TextCell.TextProperty, ".");
             lv1.ItemTemplate = template;
-
-            List<String> itens = new List<String>()
+            
+            try
             {
-                "Parafuso M90", "Parafuso M95", "Parafuso M100"
-            };
-            lv1.ItemsSource = itens;
+                Services.HttpService.SearchAsync(cod, name, position).ContinueWith(x => {
+                    list = x.Result;
+                    foreach (var item in list)
+                        names.Add(item["name"].ToString());
+                });
+            }
+            catch (Exception e)
+            {
+                DisplayAlert("Erro", e.Message, "OK");
+            }
+            lv1.ItemsSource = names;
         }
         private void Button_Clicked(object sender, EventArgs e)
         {
-            Details();
+            var index = names.IndexOf(lv1.SelectedItem.ToString());
+            var id = list[index]["id"];
+            Details((int)id);
         }
-        async void Details()
+        async void Details(int id)
         {
-            await Navigation.PushAsync(new Details());
+            await Navigation.PushAsync(new Details(id));
         }
 
         async void Logout()

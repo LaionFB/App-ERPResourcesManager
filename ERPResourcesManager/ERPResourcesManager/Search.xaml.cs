@@ -22,7 +22,7 @@ namespace ERPResourcesManager
         }
         async void Result()
         {
-            await Navigation.PushAsync(new Result());
+            await Navigation.PushAsync(new Result(cod.Text, name.Text, position.Text));
         }
 
         async void Logout()
