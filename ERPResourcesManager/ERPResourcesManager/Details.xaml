@@ -12,24 +12,24 @@
                Clicked="Button_Clicked_1" />
             <ScrollView>
                 <StackLayout Margin="30,0,30,30" VerticalOptions="Center">
-                    <Image Source="parafuso.jpg" Margin="48, 0, 48, 0"/>
+                    <!--Image Source="parafuso.jpg" Margin="48, 0, 48, 0"/-->
                     <Label Text="Item" 
                        HorizontalOptions="Start"
                        VerticalOptions="Start"/>
-                    <Entry Placeholder="" IsEnabled="False" Text="Parafuso M90"/>
+                    <Entry x:Name="name" Placeholder="" IsEnabled="False"/>
                     <Label Text="Descrição" 
                        HorizontalOptions="Start"
                        VerticalOptions="Start"/>
-                    <Entry Placeholder="" IsEnabled="False" Text="Parafuso tamanho M90 para mesas e cadeiras."/>
+                    <Entry x:Name="description" Placeholder="" IsEnabled="False"/>
                     <Label Text="Localização" 
                        HorizontalOptions="Start"
                        VerticalOptions="Start"/>
-                    <Entry Placeholder="" Text="01230204"/>
+                    <Entry x:Name="position" Placeholder=""/>
                     <Label Text="Quantidade em estoque" 
                        HorizontalOptions="Start"
                        VerticalOptions="Start"/>
-                    <Entry Placeholder="" Keyboard="Numeric" Text="10"/>
-                    <Button Text="Salvar"/>
+                    <Entry x:Name="qtd" Placeholder=""/>
+                    <Button Text="Salvar" Clicked="Button_Clicked_2"/>
                 </StackLayout>
             </ScrollView>
         </StackLayout>

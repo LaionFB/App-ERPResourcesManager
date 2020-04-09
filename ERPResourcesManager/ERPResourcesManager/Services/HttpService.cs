@@ -42,7 +42,7 @@ namespace ERPResourcesManager.Services
             {
                 var restClient = new RestClient(API_URL + "/search");
                 var request = new RestRequest(Method.GET);
-                
+
                 request.AddParameter("cod", cod);
                 request.AddParameter("name", name);
                 request.AddParameter("position", position);
@@ -56,11 +56,73 @@ namespace ERPResourcesManager.Services
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     foreach (var item in response.Data)
-                        list.Add(JsonConvert.DeserializeObject(item));                    
+                        list.Add(JsonConvert.DeserializeObject(item));
                 }
                 else
                     error = response.Content;
                 return list;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Impossível se conectar ao servidor!");
+            }
+            throw new Exception(error);
+        }
+
+        public static async System.Threading.Tasks.Task<dynamic> GetByIdAsync(int id)
+        {
+            string error;
+            try
+            {
+                var restClient = new RestClient(API_URL + "/getById");
+                var request = new RestRequest(Method.GET);
+
+                request.AddParameter("id", id);
+
+                var token = await getAuthTokenAsync();
+                request.AddHeader("Authorization", "Bearer " + token);
+
+                var response = restClient.Execute<dynamic>(request);
+                
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    return response.Data;
+                else
+                    error = response.Content;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Impossível se conectar ao servidor!");
+            }
+            throw new Exception(error);
+        }
+
+        public static async System.Threading.Tasks.Task<bool> Save(dynamic product)
+        {
+            string error;
+            try
+            {
+                var restClient = new RestClient(API_URL + "/save");
+                var request = new RestRequest(Method.POST);
+
+                request.AddJsonBody(new
+                {
+                    id = (int)product["id"],
+                    name = product["name"].ToString(),
+                    desc = product["desc"].ToString(),
+                    position = product["position"].ToString(),
+                    cod = product["cod"].ToString(),
+                    qtd = (int)product["qtd"]
+                });
+
+                var token = await getAuthTokenAsync();
+                request.AddHeader("Authorization", "Bearer " + token);
+
+                var response = restClient.Execute<bool>(request);
+
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    return response.Data;
+                else
+                    error = response.Content;
             }
             catch (Exception)
             {
