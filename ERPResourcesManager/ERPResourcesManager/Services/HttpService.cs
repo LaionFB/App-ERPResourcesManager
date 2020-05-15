@@ -83,7 +83,34 @@ namespace ERPResourcesManager.Services
                 request.AddHeader("Authorization", "Bearer " + token);
 
                 var response = restClient.Execute<dynamic>(request);
-                
+
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    return response.Data;
+                else
+                    error = response.Content;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Impossível se conectar ao servidor!");
+            }
+            throw new Exception(error);
+        }
+
+        public static async System.Threading.Tasks.Task<dynamic> GetByCodeAsync(string code)
+        {
+            string error;
+            try
+            {
+                var restClient = new RestClient(API_URL + "/getByCode");
+                var request = new RestRequest(Method.GET);
+
+                request.AddParameter("code", code);
+
+                var token = await getAuthTokenAsync();
+                request.AddHeader("Authorization", "Bearer " + token);
+
+                var response = restClient.Execute<dynamic>(request);
+
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     return response.Data;
                 else

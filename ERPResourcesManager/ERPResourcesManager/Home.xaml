@@ -27,7 +27,7 @@
                Source="camera.png"
                HorizontalOptions="Start"
                 Grid.Row="1" Grid.Column="0" 
-                     Clicked="Button_Clicked"
+                     Clicked="Button2_Clicked"
                VerticalOptions="Center" />
                 <ImageButton
                Source="search.png"

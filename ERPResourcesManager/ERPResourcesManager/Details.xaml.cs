@@ -13,13 +13,34 @@ namespace ERPResourcesManager
 	public partial class Details : ContentPage
 	{
         private dynamic product;
-		public Details (int id)
-		{
-			InitializeComponent();
+        public Details(int id)
+        {
+            InitializeComponent();
             Services.HttpService.GetByIdAsync(id).ContinueWith(x => {
                 product = x.Result;
                 name.Text = x.Result["name"].ToString();
                 description.Text = x.Result["desc"].ToString();
+                cod.Text = x.Result["cod"].ToString();
+                position.Text = x.Result["position"].ToString();
+                qtd.Text = ((int)x.Result["qtd"]).ToString();
+            });
+        }
+
+        public Details(string code)
+        {
+            InitializeComponent();
+            Services.HttpService.GetByCodeAsync(code).ContinueWith(async x => {
+                if(x == null)
+                {
+                    await DisplayAlert("Erro", "Código não encontrado!", "OK");
+                    await Navigation.PopModalAsync();
+                    return;
+                }
+
+                product = x.Result;
+                name.Text = x.Result["name"].ToString();
+                description.Text = x.Result["desc"].ToString();
+                cod.Text = x.Result["cod"].ToString();
                 position.Text = x.Result["position"].ToString();
                 qtd.Text = ((int)x.Result["qtd"]).ToString();
             });

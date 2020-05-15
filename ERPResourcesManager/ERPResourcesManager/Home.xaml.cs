@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ZXing.Mobile;
 
 namespace ERPResourcesManager
 {
@@ -15,10 +16,27 @@ namespace ERPResourcesManager
 		public Home ()
 		{
 			InitializeComponent ();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
         private void Button_Clicked(object sender, EventArgs e)
         {
             Search();
+        }
+        private async void Button2_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                var scanner = new ZXing.Mobile.MobileBarcodeScanner();
+
+                var result = await scanner.Scan();
+
+                if (result != null)
+                    await Navigation.PushAsync(new Details(result.Text));
+
+            } catch(Exception err)
+            {
+                await DisplayAlert("Erro", err.Message, "OK");
+            }
         }
         async void Search()
         {

@@ -21,6 +21,10 @@
                        HorizontalOptions="Start"
                        VerticalOptions="Start"/>
                     <Entry x:Name="description" Placeholder="" IsEnabled="False"/>
+                    <Label Text="Código" 
+                       HorizontalOptions="Start"
+                       VerticalOptions="Start"/>
+                    <Entry x:Name="cod" Placeholder="" IsEnabled="False"/>
                     <Label Text="Localização" 
                        HorizontalOptions="Start"
                        VerticalOptions="Start"/>
